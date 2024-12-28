@@ -42,7 +42,7 @@
     	"scroll-step": 5
     },
     "disk": {
-	"format": "{specific_used:0.2f} GiB used out of {specific_total:0.2f} GiB",
+	"format": "{specific_free:0.2f} GiB free out of {specific_total:0.2f} GiB",
 	"unit" : "GiB"
     }
 
