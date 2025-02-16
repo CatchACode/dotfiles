@@ -36,10 +36,18 @@
         }
     },
     "wireplumber": {
-    	"format": "{volume}%",
-    	"format-muted": "",
+    	"format": "{volume:3}% {icon}",
+    	"format-muted": "\udb81\udf5f",
+	"format-icons": {
+	    "default": [
+		"\udb81\udd7f",
+		"\udb81\udd80",
+		"\udb81\udd7e"
+	    ]
+	},
     	"max-volume": 100,
-    	"scroll-step": 5
+    	"scroll-step": 5,
+	"nospacing": 1,
     },
     "disk": {
 	"format": "\uf0a0: {specific_free:0.2f} GiB free out of {specific_total:0.2f} GiB",
