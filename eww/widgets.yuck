@@ -1,0 +1,77 @@
+(defwidget bar [monitorId]
+  (box :class "status-bar"
+    (centerbox
+      :orientation "b"
+      (leftWidgets)
+      (centerWidgets :monitorId monitorId)
+      (rightWidgets)
+    )
+  )
+)
+
+
+
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
+(deflisten focused_workspace :initial "1" "bash ~/.config/eww/scripts/get-focused-workspace")
+(deflisten active_workspaces :inital "[]" "bash ~/.config/eww/scripts/get-active-workspaces")
+(defwidget centerWidgets [monitorId]
+  (box :class "center-widgets" :orientation "v"
+    (workspaces :monitorId monitorId :focused_workspace focused_workspace :workspaces workspaces :active_workspaces active_workspaces)
+    (windowTitle :window_title {
+      jq()
+    })
+  )
+)
+
+(defwidget windowTitle [window_title]
+  (box :class "window-title"
+    (label
+      :class "window-title-label"
+      :text window_title
+      :tooltip window_title
+    )
+  )
+)
+
+(defwidget workspaces [monitorId active_workspaces focused_workspace workspaces]
+  (box :space-evenly true
+    (label :text "${active_workspaces}" :visible false :class "d-active workspaces")
+    (label :text "${focused_workspace}" :visible false :class "d-focused workspace")
+    (label :text "${workspaces}" :visible false :class "d-workspaces")
+    (for workspace in workspaces
+      (eventbox 
+        :onclick "hyprctl dispatch workspace ${workspace.id}"
+        :visible {workspace.monitorID == monitorId}
+        (box
+          :class "workspace-entry"
+          (label 
+            :text "${workspace.id}" 
+            :class "workspace-entry ${workspace.id == jq(active_workspaces, '.[] | select(.id == ${monitorId}) | .workspace') ? "active" : ""} ${workspace.id == focused_workspace ? "focused" : ""}"
+          )
+        )
+      )
+    )
+  )
+)
+
+
+
+(defwidget leftWidgets []
+  (box 
+    :orientation "h" 
+    :class "left-widgets"
+    "Example Left"
+  )
+)
+
+(defwidget rightWidgets []
+  (box 
+    :orientation "h"
+    :class "right-widgets"
+    "Example Right"
+  )
+)
+
+
+
+

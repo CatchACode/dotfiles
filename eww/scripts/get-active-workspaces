@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# This script prints JSON arrays of monitor -> active workspace mappings
+# initially and whenever workspace/monitor events occur.
+
+SOCKET="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+
+# Function to dump current monitor/workspace state
+get_state() {
+  hyprctl monitors -j | jq -c '[.[] | {id: .id, workspace: .activeWorkspace.id}]'
+}
+
+# Print initial state
+get_state
+
+# Listen for workspace or monitor focus changes and update when they occur
+socat -u UNIX-CONNECT:"$SOCKET" - | \
+  stdbuf -o0 awk -F '>>|,' '
+    /^workspace>>/ || /^focusedmon>>/ { system("hyprctl monitors -j | jq -c '\''[.[] | {id: .id, workspace: .activeWorkspace.id}]'\''") }
+  '
+

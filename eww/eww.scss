@@ -1,0 +1,38 @@
+* {
+  all: unset; // Unsets everything so you can style everything from scratch
+}
+
+.center-widgets {
+  background-color: Red;
+  padding: 1px 1px 1px 1px;
+}
+
+.status-bar {
+  background-color: Green;
+}
+
+.workspace-entry {
+  background-color: Blue;
+  //padding: 1px 1px 1px 1px;
+  //border: 5px solid darkblue;
+}
+
+.workspace-entry.current {
+  background-color: yellow;
+}
+
+.workspace-entry.active {
+  background-color: pink;
+}
+
+.center-widgets {
+
+}
+
+.window-title-container {
+
+}
+
+.window-title-label {
+  //text-overflow: ellipsis;
+}
