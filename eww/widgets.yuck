@@ -68,7 +68,38 @@
   (box 
     :orientation "h"
     :class "right-widgets"
-    "Example Right"
+    :space-evenly false
+    :halign "end"
+    (systray :pack-direction "rtl" :class "system-tray")
+    (clock)
+  )
+)
+
+(defpoll timestr
+  :interval "1s"
+  :initial-value ""
+  "date '+%H:%M'")
+(defpoll datestr
+  :interval "1m"
+  :initial-value ""
+  "date '+%a %B %d'")
+(defwidget clock []
+  (box
+    :orientation "h"
+    :class "clock"
+    (box
+      :orientation "v"
+      :class "clock-container"
+      :space-evenly: true
+      (label
+        :class "time-label"
+        :text "${timestr}"
+      )
+      (label
+        :class "date-label"
+        :text "${datestr}"
+      )
+    )
   )
 )
 
