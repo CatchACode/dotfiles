@@ -23,8 +23,8 @@ class Clock(widgets.Box):
         super().__init__(
             spacing=2,
             child=[
-                widgets.Label(label=CURRENT_TIME.value),
-                widgets.Label(label=CURRENT_DATE.value)
+                widgets.Label(label=CURRENT_TIME.value, css_classes=["clock-time"]),
+                widgets.Label(label=CURRENT_DATE.value, css_classes=["clock-date"]),
             ],
             css_classes=["clock"]
         )
