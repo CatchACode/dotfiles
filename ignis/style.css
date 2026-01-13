@@ -23,22 +23,12 @@
 }
 
 .end-widgets {
+	margin-left: 7px;
 }
 
 .clock {
 	margin-right: 7px;
 	font: JetBrainsMono;
-}
-
-.clock-time {
-
-}
-
-.workspace-titel {
-
-}
-
-.center-widgets {
 }
 
 .workspace-button {
@@ -62,10 +52,6 @@
 .workspace-button.active:hover {
 	border-top:1px solid #ffffff;
 	background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.5));
-}
-
-.workspaces {
-
 }
 
 .tray-icon {
